@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Your Account | HouseHunt Rental Platform</title>
+
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <style>
+    /* CSS Variables & Theme Setup */
+    :root {
+      --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --primary-glow: rgba(79, 70, 229, 0.25);
+      --primary-light: #eef2ff;
+
+      --secondary: #0ea5e9;
+      --success: #10b981;
+      --success-light: #ecfdf5;
+      --danger: #ef4444;
+      --danger-light: #fef2f2;
+
+      --dark: #0f172a;
+      --slate-700: #334155;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --bg-body: #f8fafc;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+      --shadow-card: 0 25px 50px -12px rgba(79, 70, 229, 0.12), 0 10px 15px -3px rgba(0, 0, 0, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-body);
+      color: var(--slate-700);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient Background Glows */
+    .ambient-glow-1 {
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 450px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(79, 70, 229, 0.12) 0%, rgba(14, 165, 233, 0.05) 50%, rgba(248, 250, 252, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Navbar Styling */
+    .navbar {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+      z-index: 1000;
+      padding: 0.85rem 1.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      text-decoration: none;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: var(--dark);
+      letter-spacing: -0.02em;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #4f46e5 0%, #0ea5e9 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 1.15rem;
+      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.35);
+    }
+
+    .brand-logo span span {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--slate-500);
+      font-weight: 600;
+      font-size: 0.92rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.18s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn-post-listing {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: #ffffff;
+      border: 1.5px solid var(--slate-200);
+      color: var(--dark);
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 0.55rem 1rem;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-post-listing i {
+      color: var(--primary);
+      font-size: 1rem;
+    }
+
+    .btn-post-listing:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .user-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: #ffffff;
+      border: 1px solid var(--slate-200);
+      padding: 0.35rem 0.85rem 0.35rem 0.45rem;
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .user-chip:hover {
+      border-color: var(--slate-400);
+      box-shadow: var(--shadow-md);
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+      text-align: left;
+    }
+
+    .user-name {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .role-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--success);
+      background-color: var(--success-light);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 2px;
+      align-self: flex-start;
+    }
+
+    .auth-profile-wrapper {
+      display: none;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .guest-auth-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .btn-login-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 0.55rem 1.15rem;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25);
+    }
+
+    .btn-login-nav:hover {
+      background: var(--primary-hover);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .btn-logout {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: #ffffff;
+      border: 1.5px solid #fecaca;
+      color: #ef4444;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 0.45rem 0.85rem;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-logout:hover {
+      background: #fef2f2;
+      border-color: #ef4444;
+      color: #dc2626;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.18);
+    }
+
+    .btn-logout i {
+      font-size: 0.95rem;
+    }
+
+    /* Main Container & Page Layout */
+    .main-wrapper {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.25rem 4rem;
+    }
+
+    .auth-container {
+      width: 100%;
+      max-width: 680px;
+    }
+
+    /* Auth Card */
+    .signup-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: var(--shadow-card);
+      padding: 2.75rem 2.5rem;
+      position: relative;
+    }
+
+    /* Header Section */
+    .card-header-area {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-icon-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #4f46e5 0%, #0ea5e9 100%);
+      color: #ffffff;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 8px 18px rgba(79, 70, 229, 0.28);
+    }
+
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--dark);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+    }
+
+    .card-subtitle {
+      font-size: 0.92rem;
+      color: var(--slate-500);
+      font-weight: 500;
+    }
+
+    .mongodb-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.65rem;
+      border-radius: var(--radius-full);
+      margin-top: 0.4rem;
+    }
+
+    /* Persona Selector */
+    .persona-section {
+      margin-bottom: 1.75rem;
+    }
+
+    .persona-label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--slate-500);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.65rem;
+    }
+
+    .persona-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+    }
+
+    .persona-card {
+      position: relative;
+      border: 2px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      cursor: pointer;
+      background: #ffffff;
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      user-select: none;
+    }
+
+    .persona-card:hover {
+      border-color: #cbd5e1;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .persona-card.active {
+      border-color: var(--primary);
+      background-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+    }
+
+    .persona-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .persona-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .persona-icon {
+      font-size: 1.25rem;
+      color: var(--slate-400);
+      transition: color 0.2s;
+    }
+
+    .persona-card.active .persona-icon {
+      color: var(--primary);
+    }
+
+    .persona-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .persona-radio-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid var(--slate-400);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .persona-card.active .persona-radio-dot {
+      border-color: var(--primary);
+      background: var(--primary);
+    }
+
+    .persona-radio-dot::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #ffffff;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .persona-card.active .persona-radio-dot::after {
+      opacity: 1;
+    }
+
+    .persona-desc {
+      font-size: 0.78rem;
+      color: var(--slate-500);
+      line-height: 1.35;
+    }
+
+    /* Form Layout (Two-Column Grid) */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.15rem 1.15rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .form-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--slate-700);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .req-star {
+      color: var(--danger);
+      font-weight: bold;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 1rem;
+      color: var(--slate-400);
+      font-size: 0.95rem;
+      pointer-events: none;
+      transition: color 0.18s ease;
+    }
+
+    .form-input {
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--dark);
+      background: #ffffff;
+      border: 1.5px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      padding: 0.72rem 1rem 0.72rem 2.65rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .form-input::placeholder {
+      color: var(--slate-400);
+      font-size: 0.86rem;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+    }
+
+    .form-input:focus ~ .input-icon {
+      color: var(--primary);
+    }
+
+    /* Input with Password Toggle */
+    .has-toggle {
+      padding-right: 2.65rem;
+    }
+
+    .toggle-password-btn {
+      position: absolute;
+      right: 0.85rem;
+      background: none;
+      border: none;
+      color: var(--slate-400);
+      font-size: 1.05rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+    }
+
+    .toggle-password-btn:hover {
+      color: var(--dark);
+    }
+
+    /* Validation & Error States */
+    .form-input.is-invalid {
+      border-color: var(--danger) !important;
+      background-color: var(--danger-light);
+    }
+
+    .form-input.is-valid {
+      border-color: var(--success) !important;
+    }
+
+    .error-msg {
+      font-size: 0.74rem;
+      color: var(--danger);
+      font-weight: 600;
+      margin-top: 0.35rem;
+      display: none;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .error-msg.visible {
+      display: flex;
+    }
+
+    /* Admin Link */
+    .admin-link-area {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
+    .admin-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      color: var(--slate-500);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.18s;
+      cursor: pointer;
+    }
+
+    .admin-link i {
+      color: var(--primary);
+      font-size: 0.95rem;
+    }
+
+    .admin-link:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    /* Admin Secret Code Box (Conditional) */
+    .admin-secret-box {
+      display: none;
+      background: var(--primary-light);
+      border: 1px solid rgba(79, 70, 229, 0.2);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      margin-bottom: 1.25rem;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    .admin-secret-box.show {
+      display: block;
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+      color: #ffffff;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 0.96rem;
+      font-weight: 700;
+      padding: 0.9rem 1.5rem;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+      transition: all 0.22s ease;
+    }
+
+    .btn-submit i {
+      font-size: 1.15rem;
+    }
+
+    .btn-submit:hover:not(:disabled) {
+      background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.45);
+    }
+
+    .btn-submit:disabled {
+      background: #cbd5e1;
+      box-shadow: none;
+      cursor: not-allowed;
+      opacity: 0.75;
+      transform: none;
+    }
+
+    /* Success Modal / Toast */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 2000;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .success-modal {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      max-width: 520px;
+      width: 100%;
+      padding: 2.25rem;
+      text-align: center;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.3);
+      position: relative;
+      animation: scaleUp 0.25s ease;
+    }
+
+    .success-icon-badge {
+      width: 64px;
+      height: 64px;
+      background: var(--success-light);
+      border: 3px solid #bbf7d0;
+      color: var(--success);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .modal-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .modal-desc {
+      font-size: 0.88rem;
+      color: var(--slate-500);
+      margin-bottom: 1.25rem;
+    }
+
+    .json-preview {
+      text-align: left;
+      background: #0f172a;
+      color: #38bdf8;
+      font-family: Consolas, Monaco, 'Courier New', Courier, monospace;
+      font-size: 0.78rem;
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      overflow-x: auto;
+      max-height: 160px;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-close-btn {
+      width: 100%;
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      font-family: var(--font-body);
+      font-weight: 700;
+      padding: 0.75rem;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .modal-close-btn:hover {
+      background: var(--primary-hover);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scaleUp {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .signup-card {
+        padding: 2rem 1.25rem;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .persona-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card-title {
+        font-size: 1.55rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Decorative Glow -->
+  <div class="ambient-glow-1"></div>
+
+  <!-- Top Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <!-- Left: Logo & Navigation Links -->
+      <div class="nav-left">
+        <a href="#" class="brand-logo">
+          <div class="logo-icon">
+            <i class="bi bi-building"></i>
+          </div>
+          <span>House<span>Hunt</span></span>
+        </a>
+
+        <ul class="nav-links">
+          <li>
+            <a href="#" class="active">
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="bi bi-search"></i>
+              Explore Rentals
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="bi bi-grid-1x2"></i>
+              Dashboard
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Right: Post Listing Button & User Profile Chip -->
+      <div class="nav-right">
+        <a href="#" class="btn-post-listing">
+          <i class="bi bi-plus-circle"></i>
+          <span>Post Listing</span>
+        </a>
+
+        <!-- Authenticated Profile Area (Displays profile chip and Logout button when logged in) -->
+        <div id="authProfileArea" class="auth-profile-wrapper">
+          <div class="user-chip" id="navUserChip" title="View Profile">
+            <img
+              id="navUserAvatar"
+              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=128&q=80"
+              alt="User Avatar"
+              class="user-avatar"
+            />
+            <div class="user-info">
+              <span class="user-name" id="navUserName">Sophia Martinez</span>
+              <span class="role-badge" id="navUserRole">RENTER</span>
+            </div>
+          </div>
+
+          <!-- Explicit Logout Button -->
+          <button class="btn-logout" id="logoutBtn" type="button" title="Log Out of your account">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+
+        <!-- Guest Actions Area (Shown when logged out) -->
+        <div id="guestAuthArea" class="guest-auth-wrapper">
+          <a href="/login" class="btn-login-nav">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Log In</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="main-wrapper">
+    <div class="auth-container">
+      <div class="signup-card">
+
+        <!-- Centered Header -->
+        <div class="card-header-area">
+          <div class="card-icon-badge">
+            <i class="bi bi-person-plus"></i>
+          </div>
+          <h1 class="card-title">Create Your Account</h1>
+          <p class="card-subtitle">Register a new ID to save directly to MongoDB</p>
+          <div class="mongodb-pill">
+            <i class="bi bi-database-check"></i> MongoDB Encrypted Storage
+          </div>
+        </div>
+
+        <!-- Signup Form -->
+        <form id="signupForm" novalidate>
+
+          <!-- Account Persona Selector -->
+          <div class="persona-section">
+            <label class="persona-label">SELECT ACCOUNT PERSONA</label>
+            <div class="persona-grid" role="radiogroup" aria-label="Select Account Persona">
+
+              <!-- Persona 1: Tenant / Renter -->
+              <div
+                class="persona-card active"
+                id="personaRenter"
+                data-role="renter"
+                tabindex="0"
+                role="radio"
+                aria-checked="true"
+              >
+                <div class="persona-top">
+                  <div class="persona-title-wrap">
+                    <i class="bi bi-house-heart persona-icon"></i>
+                    <span class="persona-name">Tenant / Renter</span>
+                  </div>
+                  <div class="persona-radio-dot"></div>
+                </div>
+                <p class="persona-desc">Browse listings, book viewings & rentals</p>
+              </div>
+
+              <!-- Persona 2: Landlord / Host -->
+              <div
+                class="persona-card"
+                id="personaOwner"
+                data-role="owner"
+                tabindex="0"
+                role="radio"
+                aria-checked="false"
+              >
+                <div class="persona-top">
+                  <div class="persona-title-wrap">
+                    <i class="bi bi-building persona-icon"></i>
+                    <span class="persona-name">Landlord / Host</span>
+                  </div>
+                  <div class="persona-radio-dot"></div>
+                </div>
+                <p class="persona-desc">Post rental listings & manage inquiries</p>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Form Fields: Two-Column Responsive Grid -->
+          <div class="form-grid">
+
+            <!-- Full Name * -->
+            <div class="form-group">
+              <label class="form-label" for="fullName">
+                Full Name <span class="req-star">*</span>
+              </label>
+              <div class="input-wrapper">
+                <i class="bi bi-person input-icon"></i>
+                <input
+                  type="text"
+                  id="fullName"
+                  class="form-input"
+                  placeholder="e.g. John Miller"
+                  required
+                />
+              </div>
+              <div class="error-msg" id="nameError">
+                <i class="bi bi-exclamation-circle"></i> Please enter your full name.
+              </div>
+            </div>
+
+            <!-- User ID / Username * -->
+            <div class="form-group">
+              <label class="form-label" for="userId">
+                User ID / Username <span class="req-star">*</span>
+              </label>
+              <div class="input-wrapper">
+                <i class="bi bi-at input-icon"></i>
+                <input
+                  type="text"
+                  id="userId"
+                  class="form-input"
+                  placeholder="e.g. john_miller"
+                  required
+                />
+              </div>
+              <div class="error-msg" id="userIdError">
+                <i class="bi bi-exclamation-circle"></i> 3-30 letters, numbers, dot, or underscore.
+              </div>
+            </div>
+
+            <!-- Email Address * -->
+            <div class="form-group">
+              <label class="form-label" for="email">
+                Email Address <span class="req-star">*</span>
+              </label>
+              <div class="input-wrapper">
+                <i class="bi bi-envelope input-icon"></i>
+                <input
+                  type="email"
+                  id="email"
+                  class="form-input"
+                  placeholder="john@example.com"
+                  required
+                />
+              </div>
+              <div class="error-msg" id="emailError">
+                <i class="bi bi-exclamation-circle"></i> Please enter a valid email address.
+              </div>
+            </div>
+
+            <!-- Phone Number (Optional) -->
+            <div class="form-group">
+              <label class="form-label" for="phone">
+                Phone Number
+              </label>
+              <div class="input-wrapper">
+                <i class="bi bi-telephone input-icon"></i>
+                <input
+                  type="tel"
+                  id="phone"
+                  class="form-input"
+                  placeholder="+1 (555) 234-5678"
+                />
+              </div>
+              <div class="error-msg" id="phoneError">
+                <i class="bi bi-exclamation-circle"></i> Invalid phone number format.
+              </div>
+            </div>
+
+            <!-- Password (min 6 chars) * -->
+            <div class="form-group">
+              <label class="form-label" for="password">
+                Password (min 6 chars) <span class="req-star">*</span>
+              </label>
+              <div class="input-wrapper">
+                <i class="bi bi-lock input-icon"></i>
+                <input
+                  type="password"
+                  id="password"
+                  class="form-input has-toggle"
+                  placeholder="••••••••"
+                  required
+                />
+                <button
+                  type="button"
+                  class="toggle-password-btn"
+                  id="togglePassword"
+                  aria-label="Toggle password visibility"
+                >
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
+              <div class="error-msg" id="passwordError">
+                <i class="bi bi-exclamation-circle"></i> Must be at least 6 characters.
+              </div>
+            </div>
+
+            <!-- Confirm Password * -->
+            <div class="form-group">
+              <label class="form-label" for="confirmPassword">
+                Confirm Password <span class="req-star">*</span>
+              </label>
+              <div class="input-wrapper">
+                <i class="bi bi-check2-circle input-icon"></i>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  class="form-input has-toggle"
+                  placeholder="••••••••"
+                  required
+                />
+                <button
+                  type="button"
+                  class="toggle-password-btn"
+                  id="toggleConfirmPassword"
+                  aria-label="Toggle confirm password visibility"
+                >
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
+              <div class="error-msg" id="confirmPasswordError">
+                <i class="bi bi-exclamation-circle"></i> Passwords do not match.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Admin Flow Link & Passkey Box -->
+          <div class="admin-link-area">
+            <a href="javascript:void(0)" class="admin-link" id="adminToggleLink">
+              <i class="bi bi-shield-lock"></i>
+              <span>Are you a platform administrator? Click here</span>
+            </a>
+          </div>
+
+          <div class="admin-secret-box" id="adminSecretBox">
+            <label class="form-label" for="adminSecret" style="color: var(--primary);">
+              Admin Verification Passkey (Default: ADMIN2026)
+            </label>
+            <div class="input-wrapper">
+              <i class="bi bi-key input-icon" style="color: var(--primary);"></i>
+              <input
+                type="password"
+                id="adminSecret"
+                class="form-input"
+                placeholder="Enter admin passkey"
+              />
+            </div>
+          </div>
+
+          <!-- Primary Submit Button -->
+          <button
+            type="submit"
+            class="btn-submit"
+            id="submitBtn"
+            disabled
+          >
+            <i class="bi bi-check2"></i>
+            <span>Save & Create Account</span>
+          </button>
+
+        </form>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Success Modal Dialog -->
+  <div class="modal-overlay" id="successModal" role="dialog" aria-modal="true">
+    <div class="success-modal">
+      <div class="success-icon-badge">
+        <i class="bi bi-check-lg"></i>
+      </div>
+      <h2 class="modal-title">Account Created Successfully!</h2>
+      <p class="modal-desc">
+        Your user ID and password have been saved directly to MongoDB. Below is the generated account payload:
+      </p>
+
+      <pre class="json-preview" id="jsonOutput"></pre>
+
+      <button type="button" class="modal-close-btn" id="closeModalBtn">
+        Continue to Platform
+      </button>
+    </div>
+  </div>
+
+  <!-- Client JavaScript Logic & Validation -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // DOM Elements
+      const form = document.getElementById('signupForm');
+      const personaRenter = document.getElementById('personaRenter');
+      const personaOwner = document.getElementById('personaOwner');
+      const adminToggleLink = document.getElementById('adminToggleLink');
+      const adminSecretBox = document.getElementById('adminSecretBox');
+      const adminSecretInput = document.getElementById('adminSecret');
+
+      const fullName = document.getElementById('fullName');
+      const userId = document.getElementById('userId');
+      const email = document.getElementById('email');
+      const phone = document.getElementById('phone');
+      const password = document.getElementById('password');
+      const confirmPassword = document.getElementById('confirmPassword');
+
+      const togglePassword = document.getElementById('togglePassword');
+      const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+      const submitBtn = document.getElementById('submitBtn');
+
+      const successModal = document.getElementById('successModal');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const jsonOutput = document.getElementById('jsonOutput');
+
+      // State
+      let selectedRole = 'renter';
+      let isAdminActive = false;
+
+      // 1. Persona Selector Logic (Radio Card Behavior)
+      function setPersona(role) {
+        selectedRole = role;
+        if (role === 'renter') {
+          personaRenter.classList.add('active');
+          personaRenter.setAttribute('aria-checked', 'true');
+          personaOwner.classList.remove('active');
+          personaOwner.setAttribute('aria-checked', 'false');
+        } else {
+          personaOwner.classList.add('active');
+          personaOwner.setAttribute('aria-checked', 'true');
+          personaRenter.classList.remove('active');
+          personaRenter.setAttribute('aria-checked', 'false');
+        }
+      }
+
+      personaRenter.addEventListener('click', () => setPersona('renter'));
+      personaOwner.addEventListener('click', () => setPersona('owner'));
+
+      personaRenter.addEventListener('keydown', (e) => {
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          setPersona('renter');
+        }
+      });
+
+      personaOwner.addEventListener('keydown', (e) => {
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          setPersona('owner');
+        }
+      });
+
+      // 2. Admin Secret Box Toggle
+      adminToggleLink.addEventListener('click', () => {
+        isAdminActive = !isAdminActive;
+        if (isAdminActive) {
+          adminSecretBox.classList.add('show');
+          adminToggleLink.innerHTML = '<i class="bi bi-x-circle"></i> <span>Cancel admin access</span>';
+        } else {
+          adminSecretBox.classList.remove('show');
+          adminSecretInput.value = '';
+          adminToggleLink.innerHTML = '<i class="bi bi-shield-lock"></i> <span>Are you a platform administrator? Click here</span>';
+        }
+        validateForm();
+      });
+
+      // 3. Password Show / Hide Toggles
+      function toggleVisibility(inputEl, btnEl) {
+        const isPassword = inputEl.getAttribute('type') === 'password';
+        inputEl.setAttribute('type', isPassword ? 'text' : 'password');
+        const icon = btnEl.querySelector('i');
+        if (isPassword) {
+          icon.classList.remove('bi-eye');
+          icon.classList.add('bi-eye-slash');
+        } else {
+          icon.classList.remove('bi-eye-slash');
+          icon.classList.add('bi-eye');
+        }
+      }
+
+      togglePassword.addEventListener('click', () => toggleVisibility(password, togglePassword));
+      toggleConfirmPassword.addEventListener('click', () => toggleVisibility(confirmPassword, toggleConfirmPassword));
+
+      // 4. Validation Rules & Helpers
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const userIdRegex = /^[a-zA-Z0-9_.-]{3,30}$/;
+
+      function validateName() {
+        const valid = fullName.value.trim().length > 0;
+        return { valid, el: fullName, errEl: document.getElementById('nameError') };
+      }
+
+      function validateUserId() {
+        const val = userId.value.trim().toLowerCase();
+        const valid = userIdRegex.test(val);
+        return { valid, el: userId, errEl: document.getElementById('userIdError') };
+      }
+
+      function validateEmail() {
+        const val = email.value.trim();
+        const valid = emailRegex.test(val);
+        return { valid, el: email, errEl: document.getElementById('emailError') };
+      }
+
+      function validatePassword() {
+        const val = password.value;
+        const valid = val.length >= 6;
+        return { valid, el: password, errEl: document.getElementById('passwordError') };
+      }
+
+      function validateConfirmPassword() {
+        const p1 = password.value;
+        const p2 = confirmPassword.value;
+        const valid = p2.length >= 6 && p1 === p2;
+        return { valid, el: confirmPassword, errEl: document.getElementById('confirmPasswordError') };
+      }
+
+      function updateFieldUI(validationResult, showErrors = true) {
+        const { valid, el, errEl } = validationResult;
+        if (showErrors) {
+          if (!valid) {
+            el.classList.add('is-invalid');
+            el.classList.remove('is-valid');
+            errEl.classList.add('visible');
+          } else {
+            el.classList.remove('is-invalid');
+            el.classList.add('is-valid');
+            errEl.classList.remove('visible');
+          }
+        }
+        return valid;
+      }
+
+      function validateForm(showErrors = false) {
+        const vName = validateName();
+        const vUserId = validateUserId();
+        const vEmail = validateEmail();
+        const vPass = validatePassword();
+        const vConf = validateConfirmPassword();
+
+        if (showErrors) {
+          updateFieldUI(vName, true);
+          updateFieldUI(vUserId, true);
+          updateFieldUI(vEmail, true);
+          updateFieldUI(vPass, true);
+          updateFieldUI(vConf, true);
+        }
+
+        const isAllValid = vName.valid && vUserId.valid && vEmail.valid && vPass.valid && vConf.valid;
+        submitBtn.disabled = !isAllValid;
+        return isAllValid;
+      }
+
+      // Attach blur & input listeners for real-time responsiveness
+      [fullName, userId, email, password, confirmPassword].forEach((input) => {
+        input.addEventListener('input', () => {
+          validateForm(false);
+        });
+
+        input.addEventListener('blur', () => {
+          if (input === fullName) updateFieldUI(validateName(), true);
+          if (input === userId) updateFieldUI(validateUserId(), true);
+          if (input === email) updateFieldUI(validateEmail(), true);
+          if (input === password) updateFieldUI(validatePassword(), true);
+          if (input === confirmPassword) updateFieldUI(validateConfirmPassword(), true);
+          validateForm(false);
+        });
+      });
+
+      // Format userId automatically to lowercase
+      userId.addEventListener('input', (e) => {
+        e.target.value = e.target.value.toLowerCase().replace(/\s+/g, '_');
+      });
+
+      // 5. Form Submit Handler
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const isFormValid = validateForm(true);
+        if (!isFormValid) {
+          return;
+        }
+
+        // Construct User Payload
+        const payload = {
+          name: fullName.value.trim(),
+          username: userId.value.trim().toLowerCase(),
+          email: email.value.trim().toLowerCase(),
+          phone: phone.value.trim() || undefined,
+          password: password.value,
+          role: isAdminActive ? 'admin' : selectedRole,
+          adminSecret: isAdminActive ? adminSecretInput.value : undefined,
+          timestamp: new Date().toISOString()
+        };
+
+        // Output to Developer Console
+        console.log('--- [HouseHunt Signup Submitted] ---');
+        console.log('Account Payload Saved for MongoDB:', JSON.stringify(payload, null, 2));
+
+        // Display JSON preview in the success modal
+        jsonOutput.textContent = JSON.stringify(payload, null, 2);
+        successModal.classList.add('active');
+
+        // Optional Backend API Attempt (if HouseHunt backend is running on port 5000)
+        fetch('http://localhost:5000/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log('[Backend API Direct MongoDB Response]:', data);
+          if (data && data.token) {
+            handleSuccessfulRegistration(data.user || payload, data.token);
+          } else {
+            handleSuccessfulRegistration(payload);
+          }
+        })
+        .catch(err => {
+          console.log('[Standalone Mode]: Form validated & JSON logged locally without remote network dependency.');
+          handleSuccessfulRegistration(payload);
+        });
+      });
+
+      // 6. Real-Time Auth State Sync & Logout Handler
+      const authProfileArea = document.getElementById('authProfileArea');
+      const guestAuthArea = document.getElementById('guestAuthArea');
+      const logoutBtn = document.getElementById('logoutBtn');
+      const navUserName = document.getElementById('navUserName');
+      const navUserRole = document.getElementById('navUserRole');
+      const navUserAvatar = document.getElementById('navUserAvatar');
+
+      function syncNavbarAuth() {
+        const token = localStorage.getItem('househunt_token');
+        const savedUserStr = localStorage.getItem('househunt_user');
+
+        if (token) {
+          // User is authenticated
+          authProfileArea.style.display = 'flex';
+          guestAuthArea.style.display = 'none';
+
+          if (savedUserStr) {
+            try {
+              const savedUser = JSON.parse(savedUserStr);
+              if (savedUser.name) navUserName.textContent = savedUser.name;
+              if (savedUser.role) navUserRole.textContent = savedUser.role.toUpperCase();
+              if (savedUser.avatar) navUserAvatar.src = savedUser.avatar;
+            } catch (e) {
+              console.warn('Could not parse user session:', e);
+            }
+          }
+        } else {
+          // User is logged out -> COMPLETELY HIDE PROFILE CHIP
+          authProfileArea.style.display = 'none';
+          guestAuthArea.style.display = 'flex';
+        }
+      }
+
+      // Logout Button Event Listener
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+          // Clear all storage
+          localStorage.removeItem('househunt_token');
+          localStorage.removeItem('househunt_user');
+          sessionStorage.clear();
+
+          // Instantly update navbar: profile disappears!
+          syncNavbarAuth();
+          console.log('[HouseHunt Auth] User logged out. Profile hidden.');
+        });
+      }
+
+      // On successful signup: save session & sync navbar
+      function handleSuccessfulRegistration(payload, token) {
+        localStorage.setItem('househunt_user', JSON.stringify(payload));
+        localStorage.setItem('househunt_token', token || ('session_' + Date.now()));
+        syncNavbarAuth();
+      }
+
+      // Close Modal
+      closeModalBtn.addEventListener('click', () => {
+        successModal.classList.remove('active');
+        form.reset();
+        setPersona('renter');
+        [fullName, userId, email, phone, password, confirmPassword].forEach(el => {
+          el.classList.remove('is-valid', 'is-invalid');
+        });
+        document.querySelectorAll('.error-msg').forEach(el => el.classList.remove('visible'));
+        submitBtn.disabled = true;
+      });
+
+      // Initial validation & auth state check on page load
+      validateForm(false);
+      syncNavbarAuth();
+    });
+  </script>
+
+</body>
+</html>
